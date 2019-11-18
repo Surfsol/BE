@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/BuildWeek-PostHere-Subreddit/BE/issues"
   },
-  "homepage": "https://github.com/BuildWeek-PostHere-Subreddit/BE#readme"
+  "homepage": "https://github.com/BuildWeek-PostHere-Subreddit/BE#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "sqlite3": "^4.1.0"
+  }
 }
