@@ -24,7 +24,7 @@ server.use('/users', usersRouter)
 
 server.get('/', (req, res) => { 
     const messageOfTheDay = process.env.MOTD || "Hello from the local server!"
-    res.send(`<h1>${messageOfTheDay}`)
+    res.send(`<h1>${messageOfTheDay}</h1>`)
 })
 
 module.exports = server;
