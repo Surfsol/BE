@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const UsersModel = require('./users-model')
 
-const {authenticate} = require('../auth/auth-middleware')
+const {authenticate} = require('../../auth/auth-middleware')
 
-const secret = require('../config/secrets')
+const secret = require('../../config/secrets')
 
 router.get('/', authenticate, (req, res) => {
     UsersModel.find()

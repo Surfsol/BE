@@ -5,6 +5,7 @@ I have two sections for notes, Packages and Files. Packages will be any npm pack
 ## Packages
 
 ### Packages Installed
+-pg (short for postgres): Needed in order to run postgres 
 
 ### Packages Updated
 Sometimes packages have vulnerabilities, if I find any, I will fix those vulnerabilities here!

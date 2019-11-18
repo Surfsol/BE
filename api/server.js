@@ -14,9 +14,8 @@ configureMiddleware(server)
 server.use(express.json())// allows express to read .json from body of request
 
 server.use('/users', usersRouter)
-// server.use('/category', catRouter)
-// server.use('/subreddit', subRouter)
-// server.use('/post', postRouter)
+server.use('/subreddit', subRouter)
+server.use('/post', postRouter)
 
 /* RUSS */
 // I switched the get message to something that can be parsed by a web browser 
