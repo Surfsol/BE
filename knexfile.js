@@ -10,10 +10,10 @@ module.exports = {
     useNullAsDefault: true //prevents bugs and issues 
   },
     migrations: {
-      directory: './data/migrations' //to put migrations under folder data
+      directory: './migrations' //to put migrations under folder data
     },
     seeds: {
-      directory: './data/seeds'
+      directory: './seeds'
     },
     // add the following
     pool: {
@@ -53,6 +53,9 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      tableName: 'knex_seeds'
     }
   }
 
