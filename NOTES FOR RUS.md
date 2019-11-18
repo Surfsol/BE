@@ -6,6 +6,7 @@ I have two sections for notes, Packages and Files. Packages will be any npm pack
 
 ### Packages Installed
 -pg (short for postgres): Needed in order to run postgres 
+-knex-cleaner: resets primary keys and cleans up our tables (resets back to seed data)
 
 ### Packages Updated
 Sometimes packages have vulnerabilities, if I find any, I will fix those vulnerabilities here!
