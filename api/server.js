@@ -1,12 +1,11 @@
 /* RUSS */
 // Added dotenv up here so we can use it!
-require('dotenv').config()
 const express = require('express')
 const server = express()  //create instance of express server
-const usersRouter = require('../users/users-router')
-// const catRouter = require('../routes/category-router')
-// const subRouter = require('../routes/sub-router')
-// const postRouter = require('../routes/posts-router')
+
+const usersRouter = require('../routes-models/users/users-router')
+const subRouter = require('../routes-models/subreddit/sub-router')
+const postRouter = require('../routes-models/posts/posts-router')
 
 const configureMiddleware = require('./api-middleware')
 configureMiddleware(server)
