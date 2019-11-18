@@ -1,5 +1,5 @@
 //connection to database
-const db = require('../data/db-config')
+const db = require('../../data/db-config')
 
 module.exports = {
     add,
