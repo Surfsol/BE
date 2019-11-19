@@ -24,12 +24,20 @@ function find() {
 function add(post){
     return db('posts')
     .insert(post)
-    .then(ids => {
-        console.log("This is the ids console log", ids)
-        const [id] = ids
-        return db('posts')
-        .where('id', '=', id)
-    })
+    // .returning("id")
+    // .then(ids => {
+    //     console.log(ids)
+    // })
+
+
+
+
+    // .then(ids => {
+    //     console.log("This is the ids console log", ids)
+    //     const [id] = ids
+        // return db('posts')
+        // .where('id', '=', id)
+    // })
     // .then(ids => {
     //     const [id] = ids;
     //     return db('users')
