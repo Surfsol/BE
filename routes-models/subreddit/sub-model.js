@@ -13,10 +13,24 @@ function find() {
     return db('subreddit').select('id', 'title');
   }
 
-async function add(sub){
-    const[id] = await db('subreddit').insert(sub)
+// async function add(sub){
+//     const[id] = await db('subreddit').insert(sub)
 
-    return findById(id)
+//     return findById(id)
+// }
+
+function add(sub){
+    return db('users')
+    .insert(sub)
+    .then(() => {
+        return db('subreddit')
+        .where('title', '=', sub.title)
+    })
+    // .then(ids => {
+    //     const [id] = ids;
+    //     return db('users')
+    //     .where({id})
+    // })
 }
 
 function findById(id){
