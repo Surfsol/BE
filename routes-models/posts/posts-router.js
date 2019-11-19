@@ -14,7 +14,8 @@ router.post('/new', (req, res)=> {
 
     PostModel.add(newPost)
         .then(saved => {
-            res.status(201).json({post: saved})
+            const first = saved[0]
+            res.status(201).json({post: first})
         })
 })
 

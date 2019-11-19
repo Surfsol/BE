@@ -5,6 +5,7 @@ exports.up = function(knex) {
         tbl.increments(); //primary key
         tbl.string('title')
             .notNullable()
+            .unique()
         tbl.string('content')
             .notNullable()
         //foreign key, on knexfile.js, pool: is used for fk enforcement

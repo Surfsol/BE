@@ -15,10 +15,28 @@ function find() {
     return db('posts').select('id', 'title', 'content', 'user_id');
   }
 
-async function add(post){
-    const[id] = await db('posts').insert(post)
+// async function add(post){
+//     const[id] = await db('posts').insert(post)
 
-    return findById(id)
+//     return findById(id)
+// }
+
+function add(post){
+    return db('posts')
+    .insert(post)
+    .then(thing => {
+        console.log('thing without brackets', thing)
+        console.log('thing with brackets', [thing])
+        const [thingy] = thing
+        console.log('thingy', thingy)
+        return db('posts')
+        .where('id', '=', thingy)
+    })
+    // .then(ids => {
+    //     const [id] = ids;
+    //     return db('users')
+    //     .where({id})
+    // })
 }
 
 function findById(id){
