@@ -24,8 +24,9 @@ router.post('/register', (req, res) => {
     
     UsersModel.add(user)
         .then(newUser => {
+            console.log(newUser)
             const token = generateToken(newUser)
-            res.status(201).json(newUser, token)
+            res.status(201).json({newUser, token})
             // UsersModel.findBy(user.username)
             // .then(user => {
             //   const id = user.id
