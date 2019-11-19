@@ -16,24 +16,31 @@ router.get('/', authenticate, (req, res) => {
 })
 
 
-router.post('/register', (req, res)=>{
+router.post('/register', (req, res) => {
     let user = req.body
 
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash
     
     UsersModel.add(user)
-        .then(saved => {
-            const token = generateToken(user)
-            console.log(saved)
-            res.status(201).json({saved, token})
+        .then(newUser => {
+            const token = generateToken(newUser)
+            res.status(201).json({newUser, token})
+            // UsersModel.findBy(user.username)
+            // .then(user => {
+            //   const id = user.id
+            //   res.status(201).json({id, token})
+            // })
+            // .catch(err => {
+            //   res.status(500).json({error: err})
+            // })
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({error: err})
         })
 })
 
-router.post('/login', (req,res)=> {
+router.post('/login', (req,res) => {
     let { username, password } = req.body
 
     UsersModel.findBy({ username })
@@ -41,9 +48,11 @@ router.post('/login', (req,res)=> {
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user)
+                const id = user.id
                 res.status(200).json({
                     message: `Welcome back ${user.username}!`,
-                    token
+                    token,
+                    id
                 })
             } else {
                 res.status(401).json({ message: 'Invalid Credentials'})

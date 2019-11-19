@@ -1,19 +1,19 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './data/red-db.sqlite3'
+      filename: './data/posthere.db3'
     },
-    useNullAsDefault: true //prevents bugs and issues 
-  },
+    useNullAsDefault: true, //prevents bugs and issues 
     migrations: {
-      directory: './migrations' //to put migrations under folder data
+      directory: './data/migrations'
     },
     seeds: {
-      directory: './seeds'
+      directory: './data/seeds'
     },
     // add the following
     pool: {
@@ -22,7 +22,26 @@ module.exports = {
         conn.run('PRAGMA foreign_keys = ON', done); // turn on Foreign Key enforcement
       },
     },
-  
+  },
+
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/postheretest.db3'
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done); 
+      },
+    },
+  },
 
   staging: {
     client: 'postgresql',
@@ -42,21 +61,17 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './data/migrations'
     },
     seeds: {
-      tableName: 'knex_seeds'
-    }
+      directory: './data/seeds'
+    },
   }
 
 };

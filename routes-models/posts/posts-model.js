@@ -1,4 +1,5 @@
 //connection to database
+require('dotenv').config()
 const db = require('../../data/db-config')
 
 module.exports = {
@@ -15,10 +16,49 @@ function find() {
     return db('posts').select('id', 'title', 'content', 'user_id');
   }
 
-async function add(post){
-    const[id] = await db('posts').insert(post)
+// async function add(post){
+//     const[id] = await db('posts').insert(post)
 
-    return findById(id)
+//     return findById(id)
+// }
+
+function add(post){
+    if (process.env.DB_ENV == 'production') {
+        console.log('hitting production')
+        return db('posts')
+        .insert(post)
+        .returning('id')
+        .then(ids => {
+            const [id] = ids 
+            return db('posts')
+            .where({id})
+            .first()
+        })
+    } else {
+        console.log('hitting development')
+        return db('posts')
+        .insert(post)
+        .then(ids => {
+            const [id] = ids 
+            return db('posts')
+            .where({id})
+        })
+    }
+
+
+
+
+    // .then(ids => {
+    //     console.log("This is the ids console log", ids)
+    //     const [id] = ids
+        // return db('posts')
+        // .where('id', '=', id)
+    // })
+    // .then(ids => {
+    //     const [id] = ids;
+    //     return db('users')
+    //     .where({id})
+    // })
 }
 
 function findById(id){
