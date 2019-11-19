@@ -23,9 +23,17 @@ router.post('/register', (req, res) => {
     user.password = hash
     
     UsersModel.add(user)
-        .then(saved => {
-            const token = generateToken(user)
-            res.status(201).json({saved, token})
+        .then(newUser => {
+            const token = generateToken(newUser)
+            res.status(201).json(newUser, token)
+            // UsersModel.findBy(user.username)
+            // .then(user => {
+            //   const id = user.id
+            //   res.status(201).json({id, token})
+            // })
+            // .catch(err => {
+            //   res.status(500).json({error: err})
+            // })
         })
         .catch(err => {
             res.status(500).json({error: err})
