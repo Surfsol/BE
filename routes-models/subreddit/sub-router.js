@@ -16,7 +16,9 @@ router.post('/new', authenticate, (req, res)=> {
 
     SubModel.add(newSub)
         .then(saved => {
-            res.status(201).json({subreddit: saved})
+            console.log(saved)
+            const first = saved[0]
+            res.status(201).json({subreddit: first})
         })
 })
 module.exports = router

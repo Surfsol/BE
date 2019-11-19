@@ -20,7 +20,7 @@ function find() {
 // }
 
 function add(sub){
-    return db('users')
+    return db('subreddit')
     .insert(sub)
     .then(() => {
         return db('subreddit')
