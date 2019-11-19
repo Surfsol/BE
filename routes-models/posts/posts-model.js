@@ -24,13 +24,11 @@ function find() {
 function add(post){
     return db('posts')
     .insert(post)
-    .then(thing => {
-        console.log('thing without brackets', thing)
-        console.log('thing with brackets', [thing])
-        const [thingy] = thing
-        console.log('thingy', thingy)
+    .then(ids => {
+        console.log(ids)
+        const [id] = ids
         return db('posts')
-        .where('id', '=', thingy)
+        .where('id', '=', id)
     })
     // .then(ids => {
     //     const [id] = ids;
