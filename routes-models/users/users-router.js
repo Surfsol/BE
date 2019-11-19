@@ -16,13 +16,13 @@ router.get('/', authenticate, (req, res) => {
 })
 
 
-router.post('/register', (req, res)=>{
+router.post('/register', async (req, res)=>{
     let user = req.body
 
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash
     
-    UsersModel.add(user)
+    await UsersModel.add(user)
         .then(saved => {
             const token = generateToken(user)
             console.log(saved)
