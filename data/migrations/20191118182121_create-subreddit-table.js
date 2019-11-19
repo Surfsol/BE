@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('subreddit', tbl => {
-        tbl.increments(); //primary key
+        tbl.increments('id'); //primary key
         tbl.string('title')
             .notNullable()
     })

@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable('posts', tbl => {
-        tbl.increments(); //primary key
+        tbl.increments('id'); //primary key
         tbl.string('title')
             .notNullable()
         tbl.string('content')
