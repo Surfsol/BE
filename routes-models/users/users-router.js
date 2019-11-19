@@ -16,16 +16,15 @@ router.get('/', authenticate, (req, res) => {
 })
 
 
-router.post('/register', async (req, res)=>{
+router.post('/register', (req, res) => {
     let user = req.body
 
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash
     
-    await UsersModel.add(user)
+    UsersModel.add(user)
         .then(saved => {
             const token = generateToken(user)
-            console.log(saved)
             res.status(201).json({saved, token})
         })
         .catch(err => {
@@ -33,7 +32,7 @@ router.post('/register', async (req, res)=>{
         })
 })
 
-router.post('/login', (req,res)=> {
+router.post('/login', (req,res) => {
     let { username, password } = req.body
 
     UsersModel.findBy({ username })
