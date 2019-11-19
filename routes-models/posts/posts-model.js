@@ -24,10 +24,10 @@ function find() {
 function add(post){
     return db('posts')
     .insert(post)
-    // .returning("id")
-    // .then(ids => {
-    //     console.log(ids)
-    // })
+    .returning("id")
+    .then(ids => {
+        console.log(ids)
+    })
 
 
 
