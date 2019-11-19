@@ -20,8 +20,17 @@ exports.up = function(knex) {
             .notNullable()
             .defaultTo(0)
         tbl.string('first')
+        tbl.string('first_subscribers')
+        tbl.string('first_description')
+        tbl.string('first_url')
         tbl.string('second')
+        tbl.string('second_subscribers')
+        tbl.string('second_description')
+        tbl.string('second_url')
         tbl.string('third')
+        tbl.string('third_subscribers')
+        tbl.string('third_description')
+        tbl.string('third_url')
         tbl.integer('subreddit_id')
             .unsigned() //integer must be positive, necessary in many dbs
             //referenced on users

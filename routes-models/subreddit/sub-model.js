@@ -1,4 +1,5 @@
 //connection to database
+require('dotenv').config()
 const db = require('../../data/db-config')
 
 module.exports = {
@@ -20,12 +21,29 @@ function find() {
 // }
 
 function add(sub){
+    if (process.env.DB_ENV == 'production') {
+        console.log('hitting production')
+        return db('subreddit')
+        .insert(sub)
+        .returning('id')
+        .then(ids => {
+            const [id] = ids
+            return db('subreddit')
+            .where({id})
+            .first()
+    })        
+} else {
+    console.log('hitting development')
     return db('subreddit')
     .insert(sub)
-    .then(() => {
+    .then(ids => {
+        const [id] = ids
         return db('subreddit')
-        .where('title', '=', sub.title)
-    })
+        .where({id})
+        .first()
+})        
+}
+    
     // .then(ids => {
     //     const [id] = ids;
     //     return db('users')

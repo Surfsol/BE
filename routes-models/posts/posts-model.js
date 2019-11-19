@@ -27,11 +27,12 @@ function add(post){
         console.log('hitting production')
         return db('posts')
         .insert(post)
-        .returning("id")
+        .returning('id')
         .then(ids => {
             const [id] = ids 
             return db('posts')
             .where({id})
+            .first()
         })
     } else {
         console.log('hitting development')
