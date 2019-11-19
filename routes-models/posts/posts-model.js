@@ -25,7 +25,7 @@ function add(post){
     return db('posts')
     .insert(post)
     .then(ids => {
-        console.log(ids)
+        console.log("This is the ids console log", ids)
         const [id] = ids
         return db('posts')
         .where('id', '=', id)
