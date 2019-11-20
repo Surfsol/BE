@@ -22,7 +22,7 @@ function find() {
 
 function add(sub){
     if (process.env.DB_ENV == 'production') {
-        console.log('hitting production')
+        // console.log('hitting production')
         return db('subreddit')
         .insert(sub)
         .returning('id')
@@ -33,7 +33,7 @@ function add(sub){
             .first()
     })        
 } else {
-    console.log('hitting development')
+    // console.log('hitting development')
     return db('subreddit')
     .insert(sub)
     .then(ids => {
