@@ -65,7 +65,7 @@ router.post('/login', (req,res) => {
 
 function generateToken(user){
     let username = user.username
-    console.log(`username`, username)
+    //console.log(`username`, username)
     
   const payload = {
       subject: user.id, //sub property in header, normally user id
@@ -76,7 +76,7 @@ function generateToken(user){
   const options = {
       expiresIn : '8h'
   }
-  console.log(`payload`, payload, secret, options)
+  //console.log(`payload`, payload, secret, options)
   //secret comes from config/secrets
   return jwt.sign(payload, secret.jwtSecret, options)
 }

@@ -6,7 +6,7 @@ const {authenticate} = require('../../auth/auth-middleware')
 router.get('/', authenticate,(req, res)=>{
     SubModel.find()
     .then(subs => {
-        res.json(subs)
+        res.status(200).json(subs)
     })
     .catch(err => res.send(err))
 })

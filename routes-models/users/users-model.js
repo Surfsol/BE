@@ -16,7 +16,7 @@ function find() {
 
 function add(user){
     if (process.env.DB_ENV == 'production') {
-        console.log('hitting production')
+        // console.log('hitting production')
         return db('users')
         .insert(user)
         .returning('id')
@@ -27,7 +27,7 @@ function add(user){
             .first()
         })
     } else {
-        console.log('hitting development')
+        // console.log('hitting development')
         return db('users')
         .insert(user)
         .then(ids => {
