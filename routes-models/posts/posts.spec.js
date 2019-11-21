@@ -38,31 +38,31 @@ describe('This is to add a new post', () => {
         })
         expect(response.status).toBe(201)
     })
-    it('gets an object?', async () => {
-        await db('posts').truncate();
-        const response = await request(server).post('/post/new').send({
-            title: 'Test', 
-            content: 'Test Content',
-            user_id: 1, 
-            link: 0
-        })
-        // console.log("Object?", response)
-        // console.log("Object?", JSON.stringify(response.body))
-        console.log("Body", )
-        expect(response.body).toBe(JSON.stringify(`${"post:" [{
-            id: 5, 
-            title: 'Test', 
-            content: 'Test Content', 
-            user_id: 1, link: 0, 
-            first: null, 
-            first_subscribers: null, 
-            first_description: null,
-            second: null,
-            second_subscribers: null,
-            second_description: null,
-            third: null,
-            third_subscribers: null,
-            third_description: null,
-            subreddit_id: null}]}`))
-    })
+    // it('gets an object?', async () => {
+    //     await db('posts').truncate();
+    //     const response = await request(server).post('/post/new').send({
+    //         title: 'Test', 
+    //         content: 'Test Content',
+    //         user_id: 1, 
+    //         link: 0
+    //     })
+    //     // console.log("Object?", response)
+    //     // console.log("Object?", JSON.stringify(response.body))
+    //     console.log("Body", )
+    //     expect(response.body).toBe(JSON.stringify(`${"post:" [{
+    //         id: 5, 
+    //         title: 'Test', 
+    //         content: 'Test Content', 
+    //         user_id: 1, link: 0, 
+    //         first: null, 
+    //         first_subscribers: null, 
+    //         first_description: null,
+    //         second: null,
+    //         second_subscribers: null,
+    //         second_description: null,
+    //         third: null,
+    //         third_subscribers: null,
+    //         third_description: null,
+    //         subreddit_id: null}]}`))
+    // })
 })

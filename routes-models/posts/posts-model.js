@@ -13,7 +13,7 @@ module.exports = {
 }
 
 function find() {
-    return db('posts').select('id', 'title', 'content', 'user_id');
+    return db('posts');
   }
 
 // async function add(post){
@@ -63,8 +63,7 @@ function add(post){
 
 function findById(id){
     return db('posts')
-        .where({id})
-        .first()
+        .where("user_id", "=", id)
 }
 
 function findBy(filter){

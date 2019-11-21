@@ -9,6 +9,16 @@ router.get('/', (req, res)=>{
     .catch(err => res.send(err))
 })
 
+router.get('/:id', (req, res) => {
+    PostModel.findById(req.params.id)
+    .then(posts => {
+        res.status(200).json(posts)
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    })
+})
+
 router.post('/new', (req, res)=> {
     let newPost = req.body
 
