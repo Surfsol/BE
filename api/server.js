@@ -10,10 +10,7 @@ const usersRouter = require('../routes-models/users/users-router')
 const subRouter = require('../routes-models/subreddit/sub-router')
 const postRouter = require('../routes-models/posts/posts-router')
 
-// const configureMiddleware = require('./api-middleware')
-// configureMiddleware(server)
-
-server.use(express.json())// allows express to read .json from body of request
+server.use(express.json()) // allows express to read .json from body of request
 server.use(helmet())
 server.use(cors())
 

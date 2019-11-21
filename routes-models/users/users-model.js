@@ -16,7 +16,6 @@ function find() {
 
 function add(user){
     if (process.env.DB_ENV == 'production') {
-        // console.log('hitting production')
         return db('users')
         .insert(user)
         .returning('id')
@@ -27,7 +26,6 @@ function add(user){
             .first()
         })
     } else {
-        // console.log('hitting development')
         return db('users')
         .insert(user)
         .then(ids => {
@@ -37,11 +35,6 @@ function add(user){
             .first()
         })
     }
-    // .then(ids => {
-    //     const [id] = ids;
-    //     return db('users')
-    //     .where({id})
-    // })
 }
 
 function findById(id){

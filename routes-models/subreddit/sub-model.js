@@ -14,15 +14,8 @@ function find() {
     return db('subreddit').select('id', 'title');
   }
 
-// async function add(sub){
-//     const[id] = await db('subreddit').insert(sub)
-
-//     return findById(id)
-// }
-
 function add(sub){
     if (process.env.DB_ENV == 'production') {
-        // console.log('hitting production')
         return db('subreddit')
         .insert(sub)
         .returning('id')
@@ -33,7 +26,6 @@ function add(sub){
             .first()
     })        
 } else {
-    // console.log('hitting development')
     return db('subreddit')
     .insert(sub)
     .then(ids => {
