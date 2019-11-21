@@ -7,24 +7,17 @@ module.exports = {
     find,
     findBy,
     findById,
+    findPostById,
     update,
     remove
-
 }
 
 function find() {
     return db('posts');
-  }
-
-// async function add(post){
-//     const[id] = await db('posts').insert(post)
-
-//     return findById(id)
-// }
+}
 
 function add(post){
     if (process.env.DB_ENV == 'production') {
-        // console.log('hitting production')
         return db('posts')
         .insert(post)
         .returning('id')
@@ -35,7 +28,6 @@ function add(post){
             .first()
         })
     } else {
-        // console.log('hitting development')
         return db('posts')
         .insert(post)
         .then(ids => {
@@ -44,21 +36,6 @@ function add(post){
             .where({id})
         })
     }
-
-
-
-
-    // .then(ids => {
-    //     console.log("This is the ids console log", ids)
-    //     const [id] = ids
-        // return db('posts')
-        // .where('id', '=', id)
-    // })
-    // .then(ids => {
-    //     const [id] = ids;
-    //     return db('users')
-    //     .where({id})
-    // })
 }
 
 function findById(id){
@@ -66,19 +43,24 @@ function findById(id){
         .where("user_id", "=", id)
 }
 
+function findPostById(id) {
+    return db('posts')
+    .where({id})
+}
+
 function findBy(filter){
     return db('posts').where(filter)
 }
 
-function update(change, id){
+function update(changes, id){
     return db('posts')
-    .update(change)
-    .where({id: id})
-    //resolve to count records updated
+    .update(changes)
+    .where({id})
 }
 
 function remove(id){
     return db('posts')
-    .delete(id)
-    .where({id: id})
+    .where({id})
+    .first()
+    .delete()
 }

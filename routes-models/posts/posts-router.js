@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const PostModel = require('./posts-model')
+const UsersModel = require('../users/users-model')
 
 router.get('/', (req, res)=>{
     PostModel.find()
@@ -24,47 +25,67 @@ router.post('/new', (req, res)=> {
 
     PostModel.add(newPost)
         .then(saved => {
-            // const first = saved[0]
             res.status(201).json({post: saved})
         })
 })
 
-router.put('/:id', (req, res) => {
-    const {id} = req.params;
-    const change = req.body
+router.put('/:id/:postid', (req, res) => {
+    const id = req.params.id
+    const postid = req.params.postid
+    const changes = req.body
 
-    PostModel.findById(id)
-    .then(post => {
-        if (post) {
-        PostModel.update(change, id)
-        .then(updated => {
-            res.json(updated)
-        })
+    UsersModel.findById(id)
+    .then(user => {
+        if (user) {
+            PostModel.findPostById(postid)
+            .then(post => {
+                if (post) {
+                PostModel.update(changes, id)
+                .then(updated => {
+                    res.json(updated)
+                })
+                } else {
+                    res.status(404).json({message: "Could not find post"})
+                }
+            })
+            .catch (err => {
+                res.status(500).json({message: 'Failed to update post.', err})
+            })
         } else {
-            res.status(404).json({message: "Could not find post"})
+            res.status(404).json({message: "Could not find user"})
         }
     })
-    .catch (err => {
-        res.status(500).json({message: 'Failed to update post.'})
+    .catch(err => {
+        res.status(500).json({message: 'Failed to find user and update post', err})
     })
 })
 
 
-router.delete('/:id', (req, res) => {
-    const {id} = req.params;
+router.delete('/:id/:postid', (req, res) => {
+    const id = req.params.id;
+    const postid = req.params.postid
 
-    PostModel.remove(id)
-    .then(deleted => {
-        if(deleted){
-            res.json({removed: deleted})
+    UsersModel.findById(id)
+    .then(user => {
+        if (user) {
+            PostModel.remove(postid)
+            .then(deleted => {
+                if(deleted){
+                    res.json({removed: deleted})
+                } else {
+                    res.status(404).json({message: 'Could not find post.'})
+                }
+            })
+            .catch(err => {
+                res.status(500).json({message: 'Failed to delete post.', err})
+            })
         } else {
-            res.status(404).json({message: 'Could not find post.'})
+            res.status(404).json({message: "Could not find user"})
         }
     })
     .catch(err => {
-        res.status(500).json({message: 'Failed to delete post.'})
+        res.status(500).json({message: 'Failed to delete the post based on user ID', err})
     })
-
 })  
 
 module.exports = router
