@@ -12,7 +12,7 @@ const postRouter = require('../routes-models/posts/posts-router')
 
 server.use(express.json()) // allows express to read .json from body of request
 server.use(helmet())
-server.use(cors())
+server.use(cors()) //should be used to prevent client from getting cors errors
 
 server.use('/users', usersRouter)
 server.use('/subreddit', subRouter)

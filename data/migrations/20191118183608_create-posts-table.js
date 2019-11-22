@@ -19,7 +19,7 @@ exports.up = function(knex) {
         tbl.boolean('link')
             .notNullable()
             .defaultTo(0)
-        tbl.text('first')
+        tbl.text('first') //text is used to handle lots of content
         tbl.text('first_subscribers')
         tbl.text('first_description')
         tbl.text('first_url')
